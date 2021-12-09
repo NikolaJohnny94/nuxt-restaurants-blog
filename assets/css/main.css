@@ -1,0 +1,29 @@
+body {
+  /* user-select: none; */
+  margin-bottom: 50px;
+}
+.back-button {
+  margin-bottom: 60px;
+}
+
+img.card-img-top {
+  height: 190px;
+}
+
+ul.dropdown-menu.show {
+  background-color: #343a40 !important;
+}
+
+@media (max-width: 991px) {
+  .dropdown-menu.show {
+    background-color: transparent !important;
+    border: none !important;
+  }
+  ul.dropdown-menu.show li a {
+    color: #fff !important;
+  }
+  .nav-item {
+    margin: auto !important;
+    text-align: center;
+  }
+}
