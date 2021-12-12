@@ -76,6 +76,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 16;
+    height: 50px;
 }
 
 footer > div {

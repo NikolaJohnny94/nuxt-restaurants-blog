@@ -1,7 +1,13 @@
+html {
+  overflow-x: hidden;
+}
+
 body {
   /* user-select: none; */
   margin-bottom: 50px;
+  overflow-x: hidden;
 }
+
 .back-button {
   margin-bottom: 60px;
 }
@@ -14,16 +20,68 @@ ul.dropdown-menu.show {
   background-color: #343a40 !important;
 }
 
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #369457 !important;
+  border-color: #369457 !important;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.page-item .page-link {
+  font-weight: bold;
+  color: #369457;
+}
+
+.page-link:focus {
+  box-shadow: none;
+}
+
+.card-body {
+  height: 300px !important;
+}
+
+@media (min-width: 1367px) {
+  .card,
+  .card-body,
+  .card-img-top {
+    width: 300px !important;
+  }
+
+  .card {
+    margin-left: 15% !important;
+  }
+}
+
+@media (min-width: 1086px) {
+  .card-body {
+    height: 320px !important;
+  }
+}
+
 @media (max-width: 991px) {
   .dropdown-menu.show {
     background-color: transparent !important;
     border: none !important;
   }
+
   ul.dropdown-menu.show li a {
     color: #fff !important;
   }
+
   .nav-item {
     margin: auto !important;
     text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1085px) {
+  .card-body {
+    height: 340px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .spinner-container {
+    margin-top: 85% !important;
   }
 }

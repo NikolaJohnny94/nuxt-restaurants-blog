@@ -13,19 +13,19 @@ export default {
     return {
       person: {},
       profile_image: "",
-      altText: "",
-    };
+      altText: ""
+    }
   },
   async mounted() {
     const res = await this.$axios
       .$get(`/persons/${this.id}`)
       .then((res) => {
-        this.person = res;
-        (this.profile_image = res.profile_image.name),
-          (this.altText = res.profile_image.alternativeText);
-      });
-  },
-};
+        this.person = res
+        this.profile_image = res.profile_image.name
+        this.altText = res.profile_image.alternativeText
+      })
+  }
+}
 </script>
 
 <style scoped>
