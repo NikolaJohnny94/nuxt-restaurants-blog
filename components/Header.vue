@@ -38,8 +38,8 @@ export default {
             categories: []
         }
     },
-    async mounted() {
-        const res = this.$axios.$get('/categories').then(res => this.categories = res)
+    async fetch() {
+        const res = await this.$http.$get('/categories').then(res => this.categories = res)
     }
 }
 </script>

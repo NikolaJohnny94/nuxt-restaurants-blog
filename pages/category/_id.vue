@@ -85,8 +85,8 @@ export default {
             ]
         }
     },
-    async mounted() {
-        const res = this.$axios.$get(`/categories/${this.$route.params.id}`).then(res => {
+    async fetch() {
+        const res = await this.$http.$get(`/categories/${this.$route.params.id}`).then(res => {
             this.category = res,
                 this.restaurants = res.restaurants
         })

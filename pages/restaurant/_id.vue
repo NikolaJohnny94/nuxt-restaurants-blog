@@ -107,8 +107,8 @@ export default {
       ]
     }
   },
-  async mounted() {
-    const res = await this.$axios
+  async fetch() {
+    const res = await this.$http
       .$get(`/restaurants/${this.$route.params.id}`)
       .then((res) => {
         this.restaurant = res

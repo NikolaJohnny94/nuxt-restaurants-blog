@@ -16,8 +16,8 @@ export default {
       altText: ""
     }
   },
-  async mounted() {
-    const res = await this.$axios
+  async fetch() {
+    const res = await this.$http
       .$get(`/persons/${this.id}`)
       .then((res) => {
         this.person = res

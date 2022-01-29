@@ -73,8 +73,8 @@ export default {
             ]
         }
     },
-    async mounted() {
-        const res = await this.$axios.$get(`/persons/${this.$route.params.id}`).then(res => {
+    async fetch() {
+        const res = await this.$http.$get(`/persons/${this.$route.params.id}`).then(res => {
             this.person = res
             this.profile_image = res.profile_image.name
             this.altText = res.profile_image.alternativeText

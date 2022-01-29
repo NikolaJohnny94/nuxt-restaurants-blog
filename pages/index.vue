@@ -57,8 +57,8 @@ export default {
       currentPage: 1,
     }
   },
-  async mounted() {
-    const res = await this.$axios.$get("/restaurants")
+  async fetch() {
+    const res = await this.$http.$get("/restaurants")
     this.restaurants = res
   },
   computed: {
