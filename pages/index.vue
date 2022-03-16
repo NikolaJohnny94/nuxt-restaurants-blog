@@ -6,7 +6,9 @@
       </h1>
       <b-row>
         <b-col v-for="restaurant in itemsPerPage" :key="restaurant.id" xs="10" sm="6" md="4" lg="3">
-          <NuxtLink :to="`/restaurant/${restaurant.id}`">
+          <NuxtLink
+            :to="{ name: 'restaurant-slug', params: { slug: restaurant.name.replace(' ', '-').toLowerCase(), id: restaurant.id } }"
+          >
             <b-card
               :title="restaurant.name"
               :img-src="restaurant.images[0].name"
@@ -58,7 +60,7 @@ export default {
     }
   },
   async fetch() {
-    const res = await this.$http.$get("/restaurants")
+    const res = await this.$axios.$get(`${process.env.API}/restaurants`)
     this.restaurants = res
   },
   computed: {

@@ -13,7 +13,9 @@
                     md="4"
                     lg="3"
                 >
-                    <NuxtLink :to="`/restaurant/${restaurant.id}`">
+                    <NuxtLink
+                        :to="{ name: 'restaurant-slug', params: { slug: restaurant.name.replace(' ', '-').toLowerCase(), id: restaurant.id } }"
+                    >
                         <b-card
                             :title="restaurant.name"
                             :img-src="restaurant.images[0].name"
@@ -86,7 +88,16 @@ export default {
         }
     },
     async fetch() {
-        const res = await this.$http.$get(`/categories/${this.$route.params.id}`).then(res => {
+        let categoryID
+        const categoriesResponse = await this.$axios.$get(
+            'https://strapi-restaurants.herokuapp.com/categories'
+        );
+        categoriesResponse.forEach((category) => {
+            if (category.name.replace(" ", "-").toLowerCase() === this.$route.params.slug) {
+                categoryID = category.id;
+            }
+        });
+        const res = await this.$axios.$get(`${process.env.API}/categories/${categoryID}`).then(res => {
             this.category = res,
                 this.restaurants = res.restaurants
         })

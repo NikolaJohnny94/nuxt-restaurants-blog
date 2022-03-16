@@ -17,8 +17,8 @@ export default {
     }
   },
   async fetch() {
-    const res = await this.$http
-      .$get(`/persons/${this.id}`)
+    const res = await this.$axios
+      .$get(`${process.env.API}/persons/${this.id}`)
       .then((res) => {
         this.person = res
         this.profile_image = res.profile_image.name

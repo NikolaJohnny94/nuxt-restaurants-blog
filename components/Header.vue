@@ -19,7 +19,7 @@
                             :key="category.id"
                         >
                             <NuxtLink
-                                :to="`/category/${category.id}`"
+                                :to="{ name: 'category-slug', params: { slug: category.name.replace(' ', '-').toLowerCase(), id: category.id } }"
                                 :title="`${category.name} category`"
                             >{{ category.name }}</NuxtLink>
                         </li>
@@ -39,7 +39,7 @@ export default {
         }
     },
     async fetch() {
-        const res = await this.$http.$get('/categories').then(res => this.categories = res)
+        const res = await this.$axios.$get(`${process.env.API}/categories`).then(res => this.categories = res)
     }
 }
 </script>

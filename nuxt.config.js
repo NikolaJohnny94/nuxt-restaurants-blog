@@ -32,6 +32,10 @@ export default {
 
   plugins: [],
 
+  env: {
+    API: process.env.API,
+  },
+
   components: true,
 
   loading: {
@@ -52,7 +56,7 @@ export default {
     ],
   ],
 
-  modules: ["bootstrap-vue/nuxt", "@nuxtjs/sitemap", "@nuxt/http"],
+  modules: ["bootstrap-vue/nuxt", "@nuxtjs/sitemap", "@nuxtjs/axios"],
 
   sitemap: {
     hostname: process.env.NETLIFY_URL,
@@ -71,13 +75,15 @@ export default {
         path: "/sitemap-restaurants.xml",
         routes: async () => {
           const responseRestaurants = await axios.get(
-            `${process.env.BASE_URL}/restaurants`
+            `${process.env.API}/restaurants`
           );
           const restaurants = responseRestaurants.data;
           let restaurantsURLS = [];
           restaurants.forEach((restaurant) => {
             restaurantsURLS.push({
-              url: `/restaurant/${restaurant._id}`,
+              url: `/restaurant/${restaurant.name
+                .replace(" ", "-")
+                .toLowerCase()}`,
               priority: 0.9,
             });
           });
@@ -89,13 +95,13 @@ export default {
         path: "/sitemap-categories.xml",
         routes: async () => {
           const responseCategory = await axios.get(
-            `${process.env.BASE_URL}/categories`
+            `${process.env.API}/categories`
           );
           const categories = responseCategory.data;
           let categoriesURLS = [];
           categories.forEach((category) => {
             categoriesURLS.push({
-              url: `/category/${category._id}`,
+              url: `/category/${category.name.replace(" ", "-").toLowerCase()}`,
               priority: 0.75,
             });
           });
@@ -106,14 +112,12 @@ export default {
       {
         path: "/sitemap-persons-profiles.xml",
         routes: async () => {
-          const responsePerson = await axios.get(
-            `${process.env.BASE_URL}/persons`
-          );
+          const responsePerson = await axios.get(`${process.env.API}/persons`);
           const persons = responsePerson.data;
           let personsURLS = [];
           persons.forEach((person) => {
             personsURLS.push({
-              url: `/person/${person._id}`,
+              url: `/person/${person.username}`,
               priority: 0.64,
             });
           });
@@ -124,15 +128,13 @@ export default {
     ],
   },
 
-  privateRuntimeConfig: {
-    http: {
-      baseURL: process.env.BASE_URL,
-    },
-  },
-
   generate: {
     fallback: true,
   },
 
-  build: {},
+  build: {
+    babel: {
+      compact: true,
+    },
+  },
 };

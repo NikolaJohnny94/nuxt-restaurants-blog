@@ -74,7 +74,16 @@ export default {
         }
     },
     async fetch() {
-        const res = await this.$http.$get(`/persons/${this.$route.params.id}`).then(res => {
+        let personID
+        const personsResponse = await this.$axios.$get(
+            'https://strapi-restaurants.herokuapp.com/persons'
+        );
+        personsResponse.forEach((person) => {
+            if (person.username === this.$route.params.slug) {
+                personID = person.id;
+            }
+        });
+        const res = await this.$axios.$get(`${process.env.API}/persons/${personID}`).then(res => {
             this.person = res
             this.profile_image = res.profile_image.name
             this.altText = res.profile_image.alternativeText
